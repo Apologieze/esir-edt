@@ -1,7 +1,7 @@
 import { universities, sallesEvents, type Event } from "@cours-esir/salles_module"
 import { convertIcsCalendar } from "ts-ics"
 import { PromisePool } from '@supercharge/promise-pool'
-import { SHU_FEEDS } from "./shu_feeds"
+import { SHU_FEEDS, HIDDEN_BUILDINGS } from "./shu_feeds"
 
 function getMonday(d: Date) {
     d = new Date(d);
@@ -82,8 +82,10 @@ export class Salles {
 
             let promises: { id: string, rootUrl: string, resourceId: string, projectId: string }[] = []
 
+            const hidden = new Set(HIDDEN_BUILDINGS.map(h => h.university + "\0" + h.building))
             for (let university of universities) {
                 for (let building of university.buildings) {
+                    if (hidden.has(university.name + "\0" + building.name)) continue
                     for (let room of building.rooms) {
                         let id = btoa(JSON.stringify([university.name, building.name, room.name]))
                         promises.push({ id, rootUrl: university.rootUrl, resourceId: room.resourceId, projectId: room.projectId })

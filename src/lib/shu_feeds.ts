@@ -92,6 +92,22 @@ export const SHU_FEEDS: ShuFeed[] = [
         room: "Amphi N",
         url: "https://planning.univ-rennes.fr/jsp/custom/modules/plannings/zWoMk7YM.shu",
     },
+    // Bâtiment 41B
+    {
+        university: "Université de Rennes",
+        building: "Bâtiment 41B",
+        room: "Salle de réunion",
+        url: "https://planning.univ-rennes.fr/jsp/custom/modules/plannings/9n9LybYP.shu",
+    },
 
     // TODO: ajouter les autres salles prioritaires (une entrée par salle).
+];
+
+// Bâtiments masqués de la page des salles (non couverts par des publications
+// et sans endpoint anonyme fonctionnel : les afficher vides n'apporte rien).
+export const HIDDEN_BUILDINGS: { university: string; building: string }[] = [
+    { university: "Université de Rennes", building: "Bâtiment 02A" },
+    { university: "Université de Rennes", building: "Bâtiment 02B" },
+    { university: "Université de Rennes", building: "Bâtiment 12D" },
+    { university: "Université de Rennes", building: "Bâtiment 40" },
 ];
