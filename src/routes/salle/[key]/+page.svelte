@@ -39,6 +39,12 @@
 <div class="p-4 items-center flex flex-col gap-8 h-full *:w-full *:max-w-xl">
 	<Header>{JSON.parse(atob(planning.id)).join(" - ")}</Header>
 
+	{#if planning.events.length === 0}
+		<p class="rounded-xl border border-yellow-500/50 bg-yellow-500/20 p-4 text-center">
+			⚠️ Planning indisponible pour le moment (données ADE inaccessibles).
+		</p>
+	{/if}
+
 	<div
 		class="overflow-auto flex-1 relative dark:bg-slate-900 bg-slate-100 rounded-2xl"
 	>

@@ -5,5 +5,5 @@ import { Salles } from "$lib/salles.svelte";
 
 export const load = async () => {
     let retour = await Salles.getCal()
-    return { retour }
+    return { retour, stats: Salles.lastSync }
 }

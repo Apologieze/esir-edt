@@ -16,7 +16,13 @@
 		date: Date;
 	} = $props();
 
-	let { until, state, error } = $derived(salleLibres(salleInfo.events, date));
+	let { until, state, error } = $derived(
+		// salleLibres() lève un TypeError sur un calendrier vide (dichotomie sur
+		// liste vide) : on court-circuite vers la branche d'erreur existante.
+		salleInfo.events.length === 0
+			? ({ error: "Planning indisponible" } as ReturnType<typeof salleLibres>)
+			: salleLibres(salleInfo.events, date),
+	);
 
 	function stringify_date(until: Date) {
 		if (until === undefined) return "updating";
